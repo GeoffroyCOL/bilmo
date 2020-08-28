@@ -31,6 +31,12 @@ class Linecommand
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $command;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Phone::class)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $phone;
     
     /**
      * getId
@@ -84,6 +90,29 @@ class Linecommand
     public function setCommand(?Command $command): self
     {
         $this->command = $command;
+
+        return $this;
+    }
+    
+    /**
+     * getPhone
+     *
+     * @return Phone|null
+     */
+    public function getPhone(): ?Phone
+    {
+        return $this->phone;
+    }
+    
+    /**
+     * setPhone
+     *
+     * @param  Phone|null $phone
+     * @return self
+     */
+    public function setPhone(?Phone $phone): self
+    {
+        $this->phone = $phone;
 
         return $this;
     }

@@ -19,7 +19,7 @@ use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
  * @DiscriminatorColumn(name="type", type="string")
  * @DiscriminatorMap(
  *      typeProperty="type",
- *      mapping={"user" = "User", "admin" = "Admin", "custosmer" = "Customer"}
+ *      mapping={"user" = "User", "admin" = "Admin", "customer" = "Customer"}
  * )
  */
 class User implements UserInterface

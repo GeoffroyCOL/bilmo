@@ -35,6 +35,7 @@ class Customer extends User
 
     public function __construct()
     {
+        parent::__construct();
         $this->roles = ['ROLE_CUSTOMER'];
         $this->buyers = new ArrayCollection();
         $this->commands = new ArrayCollection();
