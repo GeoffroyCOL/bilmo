@@ -32,7 +32,8 @@ abstract class User implements UserInterface
      * 
      * @Groups({
      *      "user:read:list",
-     *      "user:read"
+     *      "user:read",
+     *      "buyer:read"
      * })
      */
     protected $id;
@@ -43,7 +44,8 @@ abstract class User implements UserInterface
      * @Groups({
      *      "user:read:list",
      *      "user:read",
-     *      "user:write"
+     *      "user:write",
+     *      "buyer:read"
      * })
      */
     protected $username;
@@ -96,7 +98,8 @@ abstract class User implements UserInterface
      * @Groups({
      *      "user:read:list",
      *      "user:read",
-     *      "user:write"
+     *      "user:write",
+     *      "buyer:read"
      * })
      */
     protected $email;

@@ -33,3 +33,8 @@ services:
         autoconfigure: false
 
     App\DataPersister\CustomerDataPersister: ~
+
+    'App\Serializer\BuyerContextBuilder':
+        decorates: 'api_platform.serializer.context_builder'
+        arguments: [ '@App\Serializer\BuyerContextBuilder.inner' ]
+        autoconfigure: false

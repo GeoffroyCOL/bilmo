@@ -99,7 +99,7 @@ class Buyer
      * 
      * @Groups({
      *      "buyer:read:list",
-     *      "buyer:read",
+     *      "admin:buyer:read",
      * })
      */
     private $customers;
@@ -109,7 +109,7 @@ class Buyer
      * 
      * @Groups({
      *      "buyer:read:list",
-     *      "buyer:read",
+     *      "admin:buyer:read",
      *      "user:read"
      * })
      */
