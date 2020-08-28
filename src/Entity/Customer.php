@@ -49,6 +49,10 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *              "security"="is_granted('ROLE_ADMIN') or object == user",
  *              "security_message"="Vous ne pouvez pas modifer le profil de ce client !"
  *          },
+ *          "DELETE"={
+ *              "security"="is_granted('ROLE_ADMIN')",
+ *              "security_message"="Vous ne pouvez pas les droits pour supprimer un client !"
+ *          },
  *      }
  * )
  * 
