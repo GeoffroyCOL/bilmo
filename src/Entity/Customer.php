@@ -8,10 +8,12 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CustomerRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
@@ -30,7 +32,18 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *              "normalization_context"={"groups"={"user:read:list"}}
  *         }
  *      },
+ * 
+ *      itemOperations={
+ *         "GET"={
+ *              "security"="is_granted('ROLE_ADMIN') or object == user",
+ *              "security_message"="Vous ne pouvez pas consulter le profil de ce client !",
+ *              "normalization_context"={"groups"={"user:read"}}
+ *         },
+ *      }
  * )
+ * 
+ * @ApiFilter(SearchFilter::class, properties={"username": "partial"})
+ * 
  */
 class Customer extends User
 {
@@ -44,11 +57,19 @@ class Customer extends User
 
     /**
      * @ORM\ManyToMany(targetEntity=Buyer::class, inversedBy="customers")
+     * 
+     * @Groups({
+     *      "user:read"
+     * })
      */
     private $buyers;
 
     /**
      * @ORM\OneToMany(targetEntity=Command::class, mappedBy="customer", orphanRemoval=true)
+     * 
+     * @Groups({
+     *      "user:read"
+     * })
      */
     private $commands;
 
