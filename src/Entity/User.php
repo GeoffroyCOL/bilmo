@@ -6,12 +6,21 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\ORM\Mapping\InheritanceType;
+use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @InheritanceType("JOINED")
+ * @DiscriminatorColumn(name="type", type="string")
+ * @DiscriminatorMap(
+ *      typeProperty="type",
+ *      mapping={"user" = "User", "admin" = "Admin", "custosmer" = "Customer"}
+ * )
  */
 class User implements UserInterface
 {
