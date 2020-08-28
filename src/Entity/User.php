@@ -68,6 +68,11 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     protected $email;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
     
     /**
      * getId

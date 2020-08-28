@@ -62,6 +62,11 @@ class Phone
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
     
     /**
      * getId

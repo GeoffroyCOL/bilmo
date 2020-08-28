@@ -44,6 +44,7 @@ class Command
     public function __construct()
     {
         $this->lineCommand = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
     
     /**

@@ -54,6 +54,7 @@ class Buyer
     {
         $this->customers = new ArrayCollection();
         $this->commands = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
     
     /**
