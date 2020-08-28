@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Linecommand;
+use App\Entity\LineCommand;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -12,11 +12,11 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Linecommand[]    findAll()
  * @method Linecommand[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class LinecommandRepository extends ServiceEntityRepository
+class LineCommandRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Linecommand::class);
+        parent::__construct($registry, LineCommand::class);
     }
 
     // /**

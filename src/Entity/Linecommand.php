@@ -6,13 +6,13 @@
 
 namespace App\Entity;
 
-use App\Repository\LinecommandRepository;
+use App\Repository\LineCommandRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=LinecommandRepository::class)
+ * @ORM\Entity(repositoryClass=LineCommandRepository::class)
  */
-class Linecommand
+class LineCommand
 {
     /**
      * @ORM\Id

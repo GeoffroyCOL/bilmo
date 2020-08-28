@@ -6,13 +6,43 @@
 
 namespace App\Entity;
 
-use App\Repository\BuyerRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\BuyerRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=BuyerRepository::class)
+ * 
+ * @ApiResource(
+ *      attributes={
+ *          "security"="is_granted('ROLE_USER')",
+ *          "security_message"="Vous devez être connecté(e) pour accéde à cette zone",
+ *          "pagination_items_per_page"=10
+ *      },
+ * 
+ *      collectionOperations={
+ *          "GET"={
+ *              "security"="is_granted('ROLE_ADMIN')",
+ *              "security_message"="Vous ne pouvez pas les droits pour consulter la liste des acheteurs !",
+ *              "normalization_context"={"groups"={"buyer:read:list"}}
+ *          }
+ *      },
+ *      itemOperations={
+ *          "GET"={
+    *          "security"="is_granted('READ_BUYER', object)",
+    *          "security_message"="Vous ne pouvez pas consulter le profil de ce client !",
+    *          "normalization_context"={"groups"={"buyer:read"}}
+    *      },
+ *      }
+ * )
+ * 
+ * @ApiFilter(SearchFilter::class, properties={"firstName": "partial", "lastName": "partial", "customers":"partial"})
+ * 
  */
 class Buyer
 {
@@ -20,16 +50,34 @@ class Buyer
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * @Groups({
+     *      "buyer:read:list",
+     *      "buyer:read",
+     *      "user:read"
+     * })
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({
+     *      "buyer:read:list",
+     *      "buyer:read",
+     *      "user:read"
+     * })
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({
+     *      "buyer:read:list",
+     *      "buyer:read",
+     *      "user:read"
+     * })
      */
     private $lastName;
 
@@ -37,16 +85,33 @@ class Buyer
      * The date of his first order
      * 
      * @ORM\Column(type="datetime")
+     * 
+     * @Groups({
+     *      "buyer:read:list",
+     *      "buyer:read",
+     *      "user:read"
+     * })
      */
     private $createdAt;
 
     /**
      * @ORM\ManyToMany(targetEntity=Customer::class, mappedBy="buyers")
+     * 
+     * @Groups({
+     *      "buyer:read:list",
+     *      "buyer:read",
+     * })
      */
     private $customers;
 
     /**
      * @ORM\OneToMany(targetEntity=Command::class, mappedBy="buyer", orphanRemoval=true)
+     * 
+     * @Groups({
+     *      "buyer:read:list",
+     *      "buyer:read",
+     *      "user:read"
+     * })
      */
     private $commands;
 

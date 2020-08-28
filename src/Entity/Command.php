@@ -91,7 +91,7 @@ class Command
     /**
      * addLineCommand
      *
-     * @param  Linecommand $lineCommand
+     * @param  LineCommand $lineCommand
      * @return self
      */
     public function addLineCommand(LineCommand $lineCommand): self
@@ -107,7 +107,7 @@ class Command
     /**
      * removeLineCommand
      *
-     * @param  Linecommand $lineCommand
+     * @param  LineCommand $lineCommand
      * @return self
      */
     public function removeLineCommand(LineCommand $lineCommand): self
