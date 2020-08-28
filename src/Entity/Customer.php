@@ -6,13 +6,31 @@
 
 namespace App\Entity;
 
-use App\Repository\CustomerRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CustomerRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
+ * 
+ * @ApiResource(
+ *      attributes={
+ *          "security"="is_granted('ROLE_USER')",
+ *          "security_message"="Vous devez être connecté(e) pour accéde à cette zone",
+ *          "pagination_items_per_page"=10
+ *      },
+ * 
+ *      collectionOperations={
+ *         "GET"={
+ *              "security"="is_granted('ROLE_ADMIN')",
+ *              "security_message"="Vous ne pouvez pas consulter la liste des clients !",
+ *              "normalization_context"={"groups"={"user:read:list"}}
+ *         }
+ *      },
+ * )
  */
 class Customer extends User
 {
@@ -20,6 +38,7 @@ class Customer extends User
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
      */
     protected $id;
 
