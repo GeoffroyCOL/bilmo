@@ -22,3 +22,41 @@ App\Entity\User:
             - Regex:
                 pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$/'
                 message: Votre mot de passe n'est pas au bon format. Il doit contenir au moins une majuscule, une minuscule et un nombre et avoir six 6 caractères au minimum
+
+
+App\Entity\Phone:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [name]
+            message: 'Ce téléphone existe déjà'
+
+    properties:
+        name:
+            - NotBlank:
+                message: Le nom du téléphone ne peut pas être vide
+            - Length:
+                min: 6
+                minMessage: 'Le nom du téléphone doit avoir au minimum {{ limit }} charactères'
+
+        price:
+            - NotBlank:
+                message: Le prix du téléphone ne peut pas être vide
+            - Positive: 
+                message: Le prix du téléphone doit être strictement supérieur à zéro 
+
+        image:
+            - NotBlank:
+                message: L'image du téléphone n'a pas été ajoutée
+        
+        content:
+            - NotBlank:
+                message: Veuillez ajouter un contenue pour ce téléphone
+            - Length:
+                min: 10
+                minMessage: 'Le contenue doit avoir au minimum {{ limit }} charactères'
+
+        number:
+            - NotBlank:
+                message: Le nombre de téléphone ne peut pas être vide
+            - Positive: 
+                message: Le nombre de téléphone doit être strictement supérieur à zéro

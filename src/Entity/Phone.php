@@ -4,7 +4,11 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PhoneRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\NumericFilter;
 
 /**
  * @ORM\Entity(repositoryClass=PhoneRepository::class)
@@ -15,7 +19,32 @@ use ApiPlatform\Core\Annotation\ApiResource;
  *          "security_message"="Vous devez être connecté(e) pour accéde à cette zone",
  *          "pagination_items_per_page"=10
  *      },
+ * 
+ *      denormalizationContext={"groups"={"phone:write"}},
+ * 
+ *      collectionOperations={
+ *          "POST"={
+ *              "security"="is_granted('ROLE_ADMIN')",
+ *              "security_message"="Vous ne pouvez pas les droits pour ajouter un nouveau téléphone !"
+ *          },
+ *          "GET"={}
+ *      },
+ * 
+ *      itemOperations={
+ *          "PUT"={
+ *              "security"="is_granted('ROLE_ADMIN')",
+ *              "security_message"="Vous ne pouvez pas les droits pour modifier un téléphone !"
+ *          },
+ *          "DELETE"={
+ *              "security"="is_granted('ROLE_ADMIN')",
+ *              "security_message"="Vous ne pouvez pas les droits pour supprimer un téléphone !"
+ *          },
+ *          "GET"={}
+ *      }
  * )
+ * 
+ * @ApiFilter(SearchFilter::class, properties={"name": "partial"}),
+ * @ApiFilter(NumericFilter::class, properties={"price", "number", "numberSold"})
  */
 class Phone
 {
@@ -28,21 +57,37 @@ class Phone
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({
+     *      "phone:write"
+     * })
      */
     private $name;
 
     /**
      * @ORM\Column(type="float")
+     * 
+     * @Groups({
+     *      "phone:write"
+     * })
      */
     private $price;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({
+     *      "phone:write"
+     * })
      */
     private $image;
 
     /**
      * @ORM\Column(type="text")
+     * 
+     * @Groups({
+     *      "phone:write"
+     * })
      */
     private $content;
 
@@ -50,6 +95,10 @@ class Phone
      * Number of phones offered for sale
      * 
      * @ORM\Column(type="integer")
+     * 
+     * @Groups({
+     *      "phone:write"
+     * })
      */
     private $number;
 
@@ -75,6 +124,8 @@ class Phone
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->numberSold = 0;
+        $this->active = false;
     }
     
     /**
