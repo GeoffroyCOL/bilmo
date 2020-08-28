@@ -45,6 +45,10 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *              "security_message"="Vous ne pouvez pas consulter le profil de ce client !",
  *              "normalization_context"={"groups"={"user:read"}}
  *          },
+ *          "PUT"={
+ *              "security"="is_granted('ROLE_ADMIN') or object == user",
+ *              "security_message"="Vous ne pouvez pas modifer le profil de ce client !"
+ *          },
  *      }
  * )
  * 
