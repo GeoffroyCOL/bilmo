@@ -25,20 +25,26 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *          "pagination_items_per_page"=10
  *      },
  * 
+ *      denormalizationContext={"groups"={"user:write"}},
+ * 
  *      collectionOperations={
- *         "GET"={
+ *          "GET"={
  *              "security"="is_granted('ROLE_ADMIN')",
  *              "security_message"="Vous ne pouvez pas consulter la liste des clients !",
  *              "normalization_context"={"groups"={"user:read:list"}}
- *         }
+ *          },
+ *          "POST"={
+ *              "security"="is_granted('ROLE_ADMIN')",
+ *              "security_message"="Vous ne pouvez pas les droits pour ajouter un nouveau client !"
+ *          }
  *      },
  * 
  *      itemOperations={
- *         "GET"={
+ *          "GET"={
  *              "security"="is_granted('ROLE_ADMIN') or object == user",
  *              "security_message"="Vous ne pouvez pas consulter le profil de ce client !",
  *              "normalization_context"={"groups"={"user:read"}}
- *         },
+ *          },
  *      }
  * )
  * 

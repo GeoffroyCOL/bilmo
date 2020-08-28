@@ -42,7 +42,8 @@ abstract class User implements UserInterface
      * 
      * @Groups({
      *      "user:read:list",
-     *      "user:read"
+     *      "user:read",
+     *      "user:write"
      * })
      */
     protected $username;
@@ -62,6 +63,10 @@ abstract class User implements UserInterface
      * plainPassword
      *
      * @var string
+     * 
+     * @Groups({
+     *      "user:write"
+     * })
      */
     protected $plainPassword;
 
@@ -90,7 +95,8 @@ abstract class User implements UserInterface
      * 
      * @Groups({
      *      "user:read:list",
-     *      "user:read"
+     *      "user:read",
+     *      "user:write"
      * })
      */
     protected $email;
