@@ -35,9 +35,14 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *      itemOperations={
  *          "GET"={
     *          "security"="is_granted('READ_BUYER', object)",
-    *          "security_message"="Vous ne pouvez pas consulter le profil de ce client !",
+    *          "security_message"="Vous ne pouvez pas les droits pour consulter le profil de cet acheteur !",
     *          "normalization_context"={"groups"={"buyer:read"}}
     *      },
+            "DELETE"={
+ *              "security"="is_granted('REMOVE_BUYER', object)",
+ *              "security_message"="Vous ne pouvez pas les droits pour supprimer le profil de cet acheteur !",
+ *              "controller"=App\Controller\Api\Buyer\DeleteBuyer::class
+ *          },
  *      }
  * )
  * 
@@ -109,8 +114,7 @@ class Buyer
      * 
      * @Groups({
      *      "buyer:read:list",
-     *      "admin:buyer:read",
-     *      "user:read"
+     *      "admin:buyer:read"
      * })
      */
     private $commands;

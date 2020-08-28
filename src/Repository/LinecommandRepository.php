@@ -7,10 +7,10 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Linecommand|null find($id, $lockMode = null, $lockVersion = null)
- * @method Linecommand|null findOneBy(array $criteria, array $orderBy = null)
- * @method Linecommand[]    findAll()
- * @method Linecommand[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method LineCommand|null find($id, $lockMode = null, $lockVersion = null)
+ * @method LineCommand|null findOneBy(array $criteria, array $orderBy = null)
+ * @method LineCommand[]    findAll()
+ * @method LineCommand[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class LineCommandRepository extends ServiceEntityRepository
 {
@@ -20,7 +20,7 @@ class LineCommandRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Linecommand[] Returns an array of Linecommand objects
+    //  * @return LineCommand[] Returns an array of LineCommand objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class LineCommandRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Linecommand
+    public function findOneBySomeField($value): ?LineCommand
     {
         return $this->createQueryBuilder('l')
             ->andWhere('l.exampleField = :val')
