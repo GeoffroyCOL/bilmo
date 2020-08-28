@@ -21,6 +21,8 @@ use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
  *      typeProperty="type",
  *      mapping={"user" = "User", "admin" = "Admin", "customer" = "Customer"}
  * )
+ * 
+ * 
  */
 class User implements UserInterface
 {
