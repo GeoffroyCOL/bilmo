@@ -59,7 +59,9 @@ class Buyer
      * @Groups({
      *      "buyer:read:list",
      *      "buyer:read",
-     *      "user:read"
+     *      "user:read",
+     *      "command:read:list",
+     *      "command:read"
      * })
      */
     private $id;
@@ -70,7 +72,9 @@ class Buyer
      * @Groups({
      *      "buyer:read:list",
      *      "buyer:read",
-     *      "user:read"
+     *      "user:read",
+     *      "command:read:list",
+     *      "command:read"
      * })
      */
     private $firstName;
@@ -81,7 +85,9 @@ class Buyer
      * @Groups({
      *      "buyer:read:list",
      *      "buyer:read",
-     *      "user:read"
+     *      "user:read",
+     *      "command:read:list",
+     *      "command:read"
      * })
      */
     private $lastName;
@@ -103,7 +109,7 @@ class Buyer
      * @ORM\ManyToMany(targetEntity=Customer::class, mappedBy="buyers")
      * 
      * @Groups({
-     *      "admin:buyer:read",
+     *      "admin:buyer:read"
      * })
      */
     private $customers;

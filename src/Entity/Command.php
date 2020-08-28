@@ -2,13 +2,39 @@
 
 namespace App\Entity;
 
-use App\Repository\CommandRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CommandRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CommandRepository::class)
+ * 
+ * @ApiResource(
+ *      attributes={
+ *          "security"="is_granted('ROLE_USER')",
+ *          "security_message"="Vous devez être connecté(e) pour accéde à cette zone",
+ *          "pagination_items_per_page"=10
+ *      },
+ * 
+ *      collectionOperations={
+ *          "GET"={
+ *              "security"="is_granted('ROLE_ADMIN')",
+ *              "security_message"="Vous ne pouvez pas consulter la liste des commandes !",
+ *              "normalization_context"={"groups"={"command:read:list"}}
+ *          }
+ *      },
+ * 
+ *      itemOperations={
+ *          "GET"={
+ *              "security"="is_granted('READ_COMMAND', object)",
+ *              "security_message"="Vous ne pouvez pas consulter les informations de la commande !",
+ *              "normalization_context"={"groups"={"command:read"}}
+ *          }
+ *      }
+ * )
  */
 class Command
 {
@@ -16,28 +42,53 @@ class Command
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * @Groups({
+     *      "command:read:list",
+     *      "command:read"
+     * })
      */
     private $id;
 
     /**
      * @ORM\Column(type="datetime")
+     * 
+     * @Groups({
+     *      "command:read:list",
+     *      "command:read"
+     * })
      */
     private $createdAt;
 
     /**
      * @ORM\OneToMany(targetEntity=LineCommand::class, mappedBy="command", orphanRemoval=true)
+     * 
+     * @Groups({
+     *      "command:read:list",
+     *      "command:read"
+     * })
      */
     private $lineCommand;
 
     /**
      * @ORM\ManyToOne(targetEntity=Buyer::class, inversedBy="commands")
      * @ORM\JoinColumn(nullable=false)
+     * 
+     * @Groups({
+     *      "command:read:list",
+     *      "command:read"
+     * })
      */
     private $buyer;
 
     /**
      * @ORM\ManyToOne(targetEntity=Customer::class, inversedBy="commands")
      * @ORM\JoinColumn(nullable=false)
+     * 
+     * @Groups({
+     *      "command:read:list",
+     *      "admin:command:read"
+     * })
      */
     private $customer;
 

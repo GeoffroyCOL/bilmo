@@ -38,3 +38,8 @@ services:
         decorates: 'api_platform.serializer.context_builder'
         arguments: [ '@App\Serializer\BuyerContextBuilder.inner' ]
         autoconfigure: false
+
+    'App\Serializer\commandContextBuilder':
+        decorates: 'api_platform.serializer.context_builder'
+        arguments: [ '@App\Serializer\commandContextBuilder.inner' ]
+        autoconfigure: false
