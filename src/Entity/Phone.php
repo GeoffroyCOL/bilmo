@@ -2,11 +2,20 @@
 
 namespace App\Entity;
 
-use App\Repository\PhoneRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PhoneRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass=PhoneRepository::class)
+ * 
+ * @ApiResource(
+ *      attributes={
+ *          "security"="is_granted('ROLE_USER')",
+ *          "security_message"="Vous devez être connecté(e) pour accéde à cette zone",
+ *          "pagination_items_per_page"=10
+ *      },
+ * )
  */
 class Phone
 {
