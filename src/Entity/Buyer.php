@@ -103,7 +103,6 @@ class Buyer
      * @ORM\ManyToMany(targetEntity=Customer::class, mappedBy="buyers")
      * 
      * @Groups({
-     *      "buyer:read:list",
      *      "admin:buyer:read",
      * })
      */
@@ -113,7 +112,6 @@ class Buyer
      * @ORM\OneToMany(targetEntity=Command::class, mappedBy="buyer", orphanRemoval=true)
      * 
      * @Groups({
-     *      "buyer:read:list",
      *      "admin:buyer:read"
      * })
      */
