@@ -45,9 +45,15 @@ class Buyer
      */
     private $customers;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Command::class, mappedBy="buyer", orphanRemoval=true)
+     */
+    private $commands;
+
     public function __construct()
     {
         $this->customers = new ArrayCollection();
+        $this->commands = new ArrayCollection();
     }
     
     /**
@@ -164,6 +170,49 @@ class Buyer
         if ($this->customers->contains($customer)) {
             $this->customers->removeElement($customer);
             $customer->removeBuyer($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Command[]
+     */
+    public function getCommands(): Collection
+    {
+        return $this->commands;
+    }
+    
+    /**
+     * addCommand
+     *
+     * @param  Command $command
+     * @return self
+     */
+    public function addCommand(Command $command): self
+    {
+        if (!$this->commands->contains($command)) {
+            $this->commands[] = $command;
+            $command->setBuyer($this);
+        }
+
+        return $this;
+    }
+    
+    /**
+     * removeCommand
+     *
+     * @param  Command $command
+     * @return self
+     */
+    public function removeCommand(Command $command): self
+    {
+        if ($this->commands->contains($command)) {
+            $this->commands->removeElement($command);
+            // set the owning side to null (unless already changed)
+            if ($command->getBuyer() === $this) {
+                $command->setBuyer(null);
+            }
         }
 
         return $this;

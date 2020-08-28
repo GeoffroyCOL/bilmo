@@ -20,6 +20,11 @@ class Admin extends User
      * @ORM\Column(type="integer")
      */
     protected $id;
+
+    public function __construct()
+    {
+        $this->roles = ['ROLE_ADMIN'];
+    }
     
     /**
      * getId

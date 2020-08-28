@@ -28,9 +28,16 @@ class Customer extends User
      */
     private $buyers;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Command::class, mappedBy="customer", orphanRemoval=true)
+     */
+    private $commands;
+
     public function __construct()
     {
+        $this->roles = ['ROLE_CUSTOMER'];
         $this->buyers = new ArrayCollection();
+        $this->commands = new ArrayCollection();
     }
     
     /**
@@ -76,6 +83,49 @@ class Customer extends User
     {
         if ($this->buyers->contains($buyer)) {
             $this->buyers->removeElement($buyer);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Command[]
+     */
+    public function getCommands(): Collection
+    {
+        return $this->commands;
+    }
+    
+    /**
+     * addCommand
+     *
+     * @param  Command $command
+     * @return self
+     */
+    public function addCommand(Command $command): self
+    {
+        if (!$this->commands->contains($command)) {
+            $this->commands[] = $command;
+            $command->setCustomer($this);
+        }
+
+        return $this;
+    }
+    
+    /**
+     * removeCommand
+     *
+     * @param  Command $command
+     * @return self
+     */
+    public function removeCommand(Command $command): self
+    {
+        if ($this->commands->contains($command)) {
+            $this->commands->removeElement($command);
+            // set the owning side to null (unless already changed)
+            if ($command->getCustomer() === $this) {
+                $command->setCustomer(null);
+            }
         }
 
         return $this;

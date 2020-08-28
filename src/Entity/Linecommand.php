@@ -25,6 +25,12 @@ class Linecommand
      * @ORM\Column(type="integer")
      */
     private $number;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Command::class, inversedBy="lineCommand")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $command;
     
     /**
      * getId
@@ -55,6 +61,29 @@ class Linecommand
     public function setNumber(int $number): self
     {
         $this->number = $number;
+
+        return $this;
+    }
+    
+    /**
+     * getCommand
+     *
+     * @return Command|null
+     */
+    public function getCommand(): ?Command
+    {
+        return $this->command;
+    }
+    
+    /**
+     * setCommand
+     *
+     * @param  Command|null $command
+     * @return self
+     */
+    public function setCommand(?Command $command): self
+    {
+        $this->command = $command;
 
         return $this;
     }
