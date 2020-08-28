@@ -7,6 +7,8 @@
 namespace App\Entity;
 
 use App\Repository\BuyerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,6 +39,16 @@ class Buyer
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Customer::class, mappedBy="buyers")
+     */
+    private $customers;
+
+    public function __construct()
+    {
+        $this->customers = new ArrayCollection();
+    }
     
     /**
      * getId
@@ -113,6 +125,46 @@ class Buyer
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Customer[]
+     */
+    public function getCustomers(): Collection
+    {
+        return $this->customers;
+    }
+    
+    /**
+     * addCustomer
+     *
+     * @param  Customer $customer
+     * @return self
+     */
+    public function addCustomer(Customer $customer): self
+    {
+        if (!$this->customers->contains($customer)) {
+            $this->customers[] = $customer;
+            $customer->addBuyer($this);
+        }
+
+        return $this;
+    }
+    
+    /**
+     * removeCustomer
+     *
+     * @param  Customer $customer
+     * @return self
+     */
+    public function removeCustomer(Customer $customer): self
+    {
+        if ($this->customers->contains($customer)) {
+            $this->customers->removeElement($customer);
+            $customer->removeBuyer($this);
+        }
 
         return $this;
     }
