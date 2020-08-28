@@ -17,7 +17,6 @@ class BuyerFixtures extends Fixture
         for ($i=0; $i < 9; $i++) {
             $buyer = new Buyer;
             $buyer->setFirstName($faker->firstName)
-                ->setEmail($faker->email)
                 ->setLastname($faker->lastName)
             ;
 
