@@ -28,13 +28,13 @@ class Linecommand
 
     /**
      * @ORM\ManyToOne(targetEntity=Command::class, inversedBy="lineCommand")
-     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $command;
 
     /**
      * @ORM\ManyToOne(targetEntity=Phone::class)
-     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $phone;
     

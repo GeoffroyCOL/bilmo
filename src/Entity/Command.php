@@ -31,13 +31,13 @@ class Command
 
     /**
      * @ORM\ManyToOne(targetEntity=Buyer::class, inversedBy="commands")
-     * @ORM\JoinColumn(nullable=false, onDelete={"CASCADE"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $buyer;
 
     /**
      * @ORM\ManyToOne(targetEntity=Customer::class, inversedBy="commands")
-     * @ORM\JoinColumn(nullable=false, onDelete={"CASCADE"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $customer;
 
