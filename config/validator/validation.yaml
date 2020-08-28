@@ -1,0 +1,24 @@
+App\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [username]
+            message: 'Ce client existe déjà'
+    
+    properties:
+        username:
+            - NotBlank:
+                message: Ce champs ne peut pas être vide
+            - Length:
+                min: 6
+                minMessage: 'Ce champs doit avoir au minimum {{ limit }} charactères'
+
+        email:
+            - Email:
+                message: Votre adresse email {{ value }} n'est pas au bon format
+            - NotBlank:
+                message: Ce champs ne peut pas être vide
+
+        plainPassword:
+            - Regex:
+                pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}$/'
+                message: Votre mot de passe n'est pas au bon format. Il doit contenir au moins une majuscule, une minuscule et un nombre et avoir six 6 caractères au minimum
