@@ -6,13 +6,58 @@
 
 namespace App\Entity;
 
-use App\Repository\CustomerRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CustomerRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
+ * 
+ * @ApiResource(
+ *      attributes={
+ *          "security"="is_granted('ROLE_USER')",
+ *          "security_message"="Vous devez être connecté(e) pour accéde à cette zone",
+ *          "pagination_items_per_page"=10
+ *      },
+ * 
+ *      denormalizationContext={"groups"={"user:write"}},
+ * 
+ *      collectionOperations={
+ *          "GET"={
+ *              "security"="is_granted('ROLE_ADMIN')",
+ *              "security_message"="Vous ne pouvez pas consulter la liste des clients !",
+ *              "normalization_context"={"groups"={"user:read:list"}}
+ *          },
+ *          "POST"={
+ *              "security"="is_granted('ROLE_ADMIN')",
+ *              "security_message"="Vous ne pouvez pas les droits pour ajouter un nouveau client !"
+ *          }
+ *      },
+ * 
+ *      itemOperations={
+ *          "GET"={
+ *              "security"="is_granted('ROLE_ADMIN') or object == user",
+ *              "security_message"="Vous ne pouvez pas consulter le profil de ce client !",
+ *              "normalization_context"={"groups"={"user:read"}}
+ *          },
+ *          "PUT"={
+ *              "security"="is_granted('ROLE_ADMIN') or object == user",
+ *              "security_message"="Vous ne pouvez pas modifer le profil de ce client !"
+ *          },
+ *          "DELETE"={
+ *              "security"="is_granted('ROLE_ADMIN')",
+ *              "security_message"="Vous ne pouvez pas les droits pour supprimer un client !"
+ *          },
+ *      }
+ * )
+ * 
+ * @ApiFilter(SearchFilter::class, properties={"username": "partial"})
+ * 
  */
 class Customer extends User
 {
@@ -20,16 +65,25 @@ class Customer extends User
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
      */
     protected $id;
 
     /**
      * @ORM\ManyToMany(targetEntity=Buyer::class, inversedBy="customers")
+     * 
+     * @Groups({
+     *      "user:read"
+     * })
      */
     private $buyers;
 
     /**
      * @ORM\OneToMany(targetEntity=Command::class, mappedBy="customer", orphanRemoval=true)
+     * 
+     * @Groups({
+     *      "user:read"
+     * })
      */
     private $commands;
 

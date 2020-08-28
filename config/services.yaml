@@ -31,3 +31,5 @@ services:
         decorates: 'api_platform.swagger.normalizer.documentation'
         arguments: ['@App\Swagger\SwaggerDecorator.inner']
         autoconfigure: false
+
+    App\DataPersister\CustomerDataPersister: ~

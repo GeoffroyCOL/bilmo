@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping\InheritanceType;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
 
@@ -22,17 +23,28 @@ use Symfony\Component\Serializer\Annotation\DiscriminatorMap;
  *      mapping={"user" = "User", "admin" = "Admin", "customer" = "Customer"}
  * )
  */
-class User implements UserInterface
+abstract class User implements UserInterface
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * @Groups({
+     *      "user:read:list",
+     *      "user:read"
+     * })
      */
     protected $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * 
+     * @Groups({
+     *      "user:read:list",
+     *      "user:read",
+     *      "user:write"
+     * })
      */
     protected $username;
 
@@ -51,21 +63,41 @@ class User implements UserInterface
      * plainPassword
      *
      * @var string
+     * 
+     * @Groups({
+     *      "user:write"
+     * })
      */
     protected $plainPassword;
 
     /**
      * @ORM\Column(type="datetime")
+     * 
+     * @Groups({
+     *      "user:read:list",
+     *      "user:read"
+     * })
      */
     protected $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * 
+     * @Groups({
+     *      "user:read:list",
+     *      "user:read"
+     * })
      */
     protected $connectedAt;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
+     * @Groups({
+     *      "user:read:list",
+     *      "user:read",
+     *      "user:write"
+     * })
      */
     protected $email;
 
