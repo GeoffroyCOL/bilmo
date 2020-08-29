@@ -18,6 +18,15 @@ class Admin extends User
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * @Groups({
+     *      "user:read:list",
+     *      "user:read",
+     *      "user:write",
+     *      "buyer:read",
+     *      "command:read"
+     * })
+     * 
      */
     protected $id;
 

@@ -98,14 +98,6 @@ abstract class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * 
-     * @Groups({
-     *      "user:read:list",
-     *      "user:read",
-     *      "user:write",
-     *      "buyer:read",
-     *      "command:read"
-     * })
      */
     protected $email;
 
