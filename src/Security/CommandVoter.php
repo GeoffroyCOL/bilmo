@@ -41,7 +41,7 @@ class CommandVoter extends Voter
     {
         $user = $token->getUser();
 
-        if ($subject->getCustomer() === $user || $user instanceof Admin) {
+        if ($subject->getCustomer() === $user || $user instanceof Customer) {
             return $subject;
         }
     }

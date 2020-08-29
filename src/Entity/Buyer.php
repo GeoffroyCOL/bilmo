@@ -34,7 +34,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *      },
  *      itemOperations={
  *          "GET"={
-    *          "security"="is_granted('READ_BUYER', object)",
+    *          "security"="is_granted('ROLE_ADMIN') or is_granted('READ_BUYER', object)",
     *          "security_message"="Vous ne pouvez pas les droits pour consulter le profil de cet acheteur !",
     *          "normalization_context"={"groups"={"buyer:read"}}
     *      },

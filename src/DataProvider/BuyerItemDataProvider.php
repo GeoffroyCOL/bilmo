@@ -35,7 +35,7 @@ final class BuyerItemDataProvider implements ItemDataProviderInterface, Restrict
      */
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
     {
-        return Buyer::class === $resourceClass && $operationName === 'GET' && !in_array("admin:buyer:read", $context['groups']);
+        return Buyer::class === $resourceClass && $operationName === 'GET' && in_array("customer:buyer:read", $context['groups']);
     }
     
     /**
@@ -58,7 +58,6 @@ final class BuyerItemDataProvider implements ItemDataProviderInterface, Restrict
         }
 
         //If commands exist
-        
         $buyer->setCommandsByCustomer($commands);
         
 

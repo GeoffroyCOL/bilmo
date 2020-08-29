@@ -8,6 +8,7 @@ namespace App\Security;
 
 use App\Entity\Admin;
 use App\Entity\Buyer;
+use App\Entity\Customer;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
@@ -41,12 +42,8 @@ class BuyerVoter extends Voter
     {
         $user = $token->getUser();
 
-        if (($user instanceof Admin && $attribute === "READ_BUYER") || $user->getBuyers()->contains($subject)) {
+        if (($user instanceof Customer && ( $attribute === "READ_BUYER" || $attribute === "REMOVE_BUYER" ) && $user->getBuyers()->contains($subject))) {
             return $subject;
-        }
-
-        if ($user instanceof Admin && $attribute === "REMOVE_BUYER") {
-            return false;
         }
     }
 }
