@@ -33,6 +33,7 @@ services:
         autoconfigure: false
 
     App\DataPersister\CustomerDataPersister: ~
+    App\DataPersister\CommandDataPersister: ~
 
     'App\Serializer\BuyerContextBuilder':
         decorates: 'api_platform.serializer.context_builder'

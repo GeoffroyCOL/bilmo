@@ -60,3 +60,45 @@ App\Entity\Phone:
                 message: Le nombre de téléphone ne peut pas être vide
             - Positive: 
                 message: Le nombre de téléphone doit être strictement supérieur à zéro
+
+
+App\Entity\Command:
+    properties:
+        buyer:
+            - Valid: ~
+
+        lineCommand:
+            - Valid: ~
+
+App\Entity\LineCommand:
+    properties:
+        phone:
+            - NotBlank:
+                message: Veuillez ajouter un téléphone
+
+        number:
+            - NotBlank:
+                message: Veuillez ajouter un nombre de téléphone
+            - Positive:
+                message: Ce nombre doit être strictement supérieur à zéro
+
+App\Entity\Buyer:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [lastName, firstName]
+            message: 'Cet acheteur existe déjà'
+
+    properties:
+        firstName:
+            - NotBlank:
+                message: Le prénom de l'acheteur est vide
+            - Length:
+                min: 3
+                minMessage: 'Le prénom doit avoir au minimum {{ limit }} charactères'
+
+        lastName:
+            - NotBlank:
+                message: Le nom de l'acheteur est vide
+            - Length:
+                min: 3
+                minMessage: 'Le nom doit avoir au minimum {{ limit }} charactères'

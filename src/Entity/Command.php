@@ -19,11 +19,17 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "pagination_items_per_page"=10
  *      },
  * 
+ *      denormalizationContext={"groups"={"command:write"}},
+ * 
  *      collectionOperations={
  *          "GET"={
  *              "security"="is_granted('ROLE_ADMIN')",
  *              "security_message"="Vous ne pouvez pas consulter la liste des commandes !",
  *              "normalization_context"={"groups"={"command:read:list"}}
+ *          },
+ *          "POST"={
+ *              "security"="is_granted('ROLE_CUSTOMER')",
+ *              "security_message"="Vous ne pouvez pas ajouter de commande !",
  *          }
  *      },
  * 
@@ -65,22 +71,24 @@ class Command
     private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=LineCommand::class, mappedBy="command", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=LineCommand::class, mappedBy="command", orphanRemoval=true, cascade={"persist"})
      * 
      * @Groups({
-     *      "command:read"
+     *      "command:read",
+     *      "command:write"
      * })
      */
     private $lineCommand;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Buyer::class, inversedBy="commands")
+     * @ORM\ManyToOne(targetEntity=Buyer::class, inversedBy="commands", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * 
      * @Groups({
      *      "command:read:list",
      *      "command:read",
-     *      "user:read"
+     *      "user:read",
+     *      "command:write"
      * })
      */
     private $buyer;
@@ -91,7 +99,7 @@ class Command
      * 
      * @Groups({
      *      "command:read:list",
-     *      "admin:command:read"
+     *      "admin:buyer:read"
      * })
      */
     private $customer;

@@ -26,7 +26,8 @@ class LineCommand
      * @ORM\Column(type="integer")
      * 
      * @Groups({
-     *      "command:read"
+     *      "command:read",
+     *      "command:write"
      * })
      */
     private $number;
@@ -42,7 +43,8 @@ class LineCommand
      * @ORM\JoinColumn(nullable=false)
      * 
      * @Groups({
-     *      "command:read"
+     *      "command:read",
+     *      "command:write"
      * })
      * 
      */

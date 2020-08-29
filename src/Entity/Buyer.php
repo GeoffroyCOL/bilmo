@@ -74,7 +74,8 @@ class Buyer
      *      "buyer:read",
      *      "user:read",
      *      "command:read:list",
-     *      "command:read"
+     *      "command:read",
+     *      "command:write"
      * })
      */
     private $firstName;
@@ -87,7 +88,8 @@ class Buyer
      *      "buyer:read",
      *      "user:read",
      *      "command:read:list",
-     *      "command:read"
+     *      "command:read",
+     *      "command:write"
      * })
      */
     private $lastName;
