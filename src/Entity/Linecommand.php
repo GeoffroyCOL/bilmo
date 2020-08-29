@@ -6,8 +6,9 @@
 
 namespace App\Entity;
 
-use App\Repository\LineCommandRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\LineCommandRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=LineCommandRepository::class)
@@ -23,6 +24,10 @@ class LineCommand
 
     /**
      * @ORM\Column(type="integer")
+     * 
+     * @Groups({
+     *      "command:read"
+     * })
      */
     private $number;
 
@@ -35,6 +40,11 @@ class LineCommand
     /**
      * @ORM\ManyToOne(targetEntity=Phone::class)
      * @ORM\JoinColumn(nullable=false)
+     * 
+     * @Groups({
+     *      "command:read"
+     * })
+     * 
      */
     private $phone;
     

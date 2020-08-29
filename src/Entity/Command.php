@@ -45,7 +45,9 @@ class Command
      * 
      * @Groups({
      *      "command:read:list",
-     *      "command:read"
+     *      "command:read",
+     *      "buyer:read",
+     *      "user:read"
      * })
      */
     private $id;
@@ -55,7 +57,9 @@ class Command
      * 
      * @Groups({
      *      "command:read:list",
-     *      "command:read"
+     *      "command:read",
+     *      "buyer:read",
+     *      "user:read"
      * })
      */
     private $createdAt;
@@ -64,7 +68,6 @@ class Command
      * @ORM\OneToMany(targetEntity=LineCommand::class, mappedBy="command", orphanRemoval=true)
      * 
      * @Groups({
-     *      "command:read:list",
      *      "command:read"
      * })
      */
@@ -76,7 +79,8 @@ class Command
      * 
      * @Groups({
      *      "command:read:list",
-     *      "command:read"
+     *      "command:read",
+     *      "user:read"
      * })
      */
     private $buyer;
@@ -87,7 +91,8 @@ class Command
      * 
      * @Groups({
      *      "command:read:list",
-     *      "admin:command:read"
+     *      "admin:command:read",
+     *      "buyer:read"
      * })
      */
     private $customer;

@@ -52,6 +52,11 @@ class Phone
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
+     * @Groups({
+     *      "command:read"
+     * })
+     * 
      */
     private $id;
 
@@ -59,7 +64,8 @@ class Phone
      * @ORM\Column(type="string", length=255)
      * 
      * @Groups({
-     *      "phone:write"
+     *      "phone:write",
+     *      "command:read"
      * })
      */
     private $name;
@@ -68,7 +74,8 @@ class Phone
      * @ORM\Column(type="float")
      * 
      * @Groups({
-     *      "phone:write"
+     *      "phone:write",
+     *      "command:read"
      * })
      */
     private $price;
