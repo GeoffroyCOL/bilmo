@@ -131,7 +131,6 @@ class Buyer
      * @Groups({
      *      "customer:buyer:read"
      * })
-     * 
      */
     private $commandsByCustomer;
 

@@ -241,7 +241,8 @@ class Command
      * 
      *  @Groups({
      *      "command:read",
-     *      "user:read"
+     *      "user:read",
+     *      "customer:buyer:read"
      * })
      * 
      * @return  float|null

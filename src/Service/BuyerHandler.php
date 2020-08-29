@@ -31,6 +31,12 @@ class BuyerHandler
         $this->manager->flush();
     }
 
+    public function delete(Buyer $buyer)
+    {
+        $this->manager->remove($buyer);
+        $this->manager->flush();
+    }
+
     /**
      * getBuyerForCommand
      *

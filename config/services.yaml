@@ -51,6 +51,10 @@ services:
         tags:
             - { name: 'doctrine.orm.entity_listener', event: 'preRemove', entity: 'App\Entity\Buyer', lazy: true }
 
+    App\Listener\CustomerListener:
+        tags:
+            - { name: 'doctrine.orm.entity_listener', event: 'preRemove', entity: 'App\Entity\Customer', lazy: true }
+
     'App\Serializer\BuyerContextBuilder':
         decorates: 'api_platform.serializer.context_builder'
         arguments: [ '@App\Serializer\BuyerContextBuilder.inner' ]
