@@ -27,8 +27,8 @@ class CommandListener
         $this->customerHandler->AddRelationWithBuyer($command->getCustomer(), $command->getBuyer());
 
         //Allows you to modify the numberSold and active attributes
-        /*foreach ($command->getLineCommand()->toArray() as $line) {
+        foreach ($command->getLineCommand()->toArray() as $line) {
             $this->phoneHandler->edit($line->getPhone(), $line->getNumber());
-        }*/
+        }
     }
 }
