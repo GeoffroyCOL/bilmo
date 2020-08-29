@@ -240,7 +240,8 @@ class Command
      * Get the value of price
      * 
      *  @Groups({
-     *      "command:read"
+     *      "command:read",
+     *      "user:read"
      * })
      * 
      * @return  float|null
