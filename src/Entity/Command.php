@@ -29,7 +29,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          },
  *          "POST"={
  *              "security"="is_granted('ROLE_CUSTOMER')",
- *              "security_message"="Vous ne pouvez pas ajouter de commande !",
+ *              "security_message"="Vous ne pouvez pas ajouter de commande !"
  *          }
  *      },
  * 
@@ -38,6 +38,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *              "security"="is_granted('READ_COMMAND', object)",
  *              "security_message"="Vous ne pouvez pas consulter les informations de la commande !",
  *              "normalization_context"={"groups"={"command:read"}}
+ *          },
+ *          "DELETE"={
+ *              "security"="is_granted('REMOVE_COMMAND', object)",
+ *              "security_message"="Vous ne pouvez pas supprimer commande !"
  *          }
  *      }
  * )
