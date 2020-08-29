@@ -91,8 +91,7 @@ class Command
      * 
      * @Groups({
      *      "command:read:list",
-     *      "admin:command:read",
-     *      "buyer:read"
+     *      "admin:command:read"
      * })
      */
     private $customer;

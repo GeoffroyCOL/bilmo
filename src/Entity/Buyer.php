@@ -122,6 +122,16 @@ class Buyer
      * })
      */
     private $commands;
+    
+    /**
+     * commandsByCustomer - Retrieve the list of orders from a customer
+     * 
+     * @Groups({
+     *      "customer:buyer:read"
+     * })
+     * 
+     */
+    private $commandsByCustomer;
 
     public function __construct()
     {
@@ -288,6 +298,26 @@ class Buyer
                 $command->setBuyer(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * Get commandsByCustomer - Retrieve the list of orders from a customer
+     */ 
+    public function getCommandsByCustomer()
+    {
+        return $this->commandsByCustomer;
+    }
+
+    /**
+     * Set commandsByCustomer - Retrieve the list of orders from a customer
+     *
+     * @return  self
+     */ 
+    public function setCommandsByCustomer($commandsByCustomer)
+    {
+        $this->commandsByCustomer = $commandsByCustomer;
 
         return $this;
     }

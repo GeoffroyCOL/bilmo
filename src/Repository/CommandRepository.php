@@ -2,9 +2,11 @@
 
 namespace App\Repository;
 
+use App\Entity\Buyer;
 use App\Entity\Command;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Customer;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Command|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,32 +21,22 @@ class CommandRepository extends ServiceEntityRepository
         parent::__construct($registry, Command::class);
     }
 
-    // /**
-    //  * @return Command[] Returns an array of Command objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Search the list of orders according to the buyer and the customer
+     *
+     * @param  Buyer $buyer
+     * @param  Customer $customer
+     * @return Command[]
+    */
+    public function findCommandForBuyerByCustomer(Buyer $buyer, Customer $customer)
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('c.buyer = :buyer')
+            ->andWhere('c.customer = :customer')
+            ->setParameter('buyer', $buyer)
+            ->setParameter('customer', $customer)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Command
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

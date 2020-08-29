@@ -44,6 +44,17 @@ final class BuyerContextBuilder implements SerializerContextBuilderInterface
             $context['groups'][] = 'admin:buyer:read';
         }
 
+        if (
+            $resourceClass === Buyer::class
+            && isset($context['groups'])
+            && $this->authorizationChecker->isGranted('ROLE_CUSTOMER')
+            && true === $normalization
+            && $context['operation_type'] === "item"
+        ) {
+            $context['groups'][] = 'customer:buyer:read';
+        }
+
+
         return $context;
     }
 }
