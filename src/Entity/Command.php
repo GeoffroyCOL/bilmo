@@ -231,4 +231,22 @@ class Command
 
         return $this;
     }
+
+    /**
+     * Get the value of price
+     * 
+     *  @Groups({
+     *      "command:read"
+     * })
+     * 
+     * @return  float|null
+     */ 
+    public function getPrice(): ?float
+    {
+        $total = 0;
+        foreach ($this->getLineCommand()->toArray() as $line) {
+            $total += $line->getPrice();
+        }
+        return round($total, 2, PHP_ROUND_HALF_UP);
+    }
 }

@@ -128,4 +128,18 @@ class LineCommand
 
         return $this;
     }
+
+    /**
+     * Display price for a row
+     * 
+     * @Groups({
+     *      "command:read"
+     * })
+     * 
+     * @return  float|null
+     */ 
+    public function getPrice(): ?float
+    {
+        return round($this->getNumber() * $this->getPhone()->getPrice(), 2, PHP_ROUND_HALF_UP);
+    }
 }
