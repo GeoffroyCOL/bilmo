@@ -8,6 +8,7 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\NumericFilter;
 
 /**
@@ -27,7 +28,9 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\NumericFilter;
  *              "security"="is_granted('ROLE_ADMIN')",
  *              "security_message"="Vous ne pouvez pas les droits pour ajouter un nouveau téléphone !"
  *          },
- *          "GET"={}
+ *          "GET"={
+ *              "normalization_context"={"groups"={"phone:read:list"}}
+ *          }
  *      },
  * 
  *      itemOperations={
@@ -39,12 +42,15 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\NumericFilter;
  *              "security"="is_granted('ROLE_ADMIN')",
  *              "security_message"="Vous ne pouvez pas les droits pour supprimer un téléphone !"
  *          },
- *          "GET"={}
+ *          "GET"={
+ *              "normalization_context"={"groups"={"phone:read"}}
+ *          }
  *      }
  * )
  * 
  * @ApiFilter(SearchFilter::class, properties={"name": "partial"}),
  * @ApiFilter(NumericFilter::class, properties={"price", "number", "numberSold"})
+ * @ApiFilter(BooleanFilter::class, properties={"active"})
  */
 class Phone
 {
@@ -54,7 +60,8 @@ class Phone
      * @ORM\Column(type="integer")
      * 
      * @Groups({
-     *      "command:read"
+     *      "command:read",
+     *      "phone:read:list"
      * })
      * 
      */
@@ -65,7 +72,9 @@ class Phone
      * 
      * @Groups({
      *      "phone:write",
-     *      "command:read"
+     *      "command:read",
+     *      "phone:read:list",
+     *      "phone:read"
      * })
      */
     private $name;
@@ -75,7 +84,9 @@ class Phone
      * 
      * @Groups({
      *      "phone:write",
-     *      "command:read"
+     *      "command:read",
+     *      "phone:read:list",
+     *      "phone:read"
      * })
      */
     private $price;
@@ -84,7 +95,9 @@ class Phone
      * @ORM\Column(type="string", length=255)
      * 
      * @Groups({
-     *      "phone:write"
+     *      "phone:write",
+     *      "phone:read:list",
+     *      "phone:read"
      * })
      */
     private $image;
@@ -93,7 +106,9 @@ class Phone
      * @ORM\Column(type="text")
      * 
      * @Groups({
-     *      "phone:write"
+     *      "phone:write",
+     *      "phone:read:list",
+     *      "phone:read"
      * })
      */
     private $content;
@@ -104,7 +119,8 @@ class Phone
      * @ORM\Column(type="integer")
      * 
      * @Groups({
-     *      "phone:write"
+     *      "phone:write",
+     *      "admin:read:phone"
      * })
      */
     private $number;
@@ -113,6 +129,10 @@ class Phone
      * Number of phones sold
      * 
      * @ORM\Column(type="integer")
+     * 
+     * @Groups({
+     *      "admin:read:phone"
+     * })
      */
     private $numberSold;
 
@@ -120,6 +140,11 @@ class Phone
      * If the phone goes on sale
      * 
      * @ORM\Column(type="boolean")
+     * 
+     * @Groups({
+     *      "admin:read:phone",
+     *      "phone:read"
+     * })
      */
     private $active;
 
@@ -132,7 +157,7 @@ class Phone
     {
         $this->createdAt = new \DateTime();
         $this->numberSold = 0;
-        $this->active = false;
+        $this->active = true;
     }
     
     /**

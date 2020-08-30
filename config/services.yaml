@@ -60,7 +60,12 @@ services:
         arguments: [ '@App\Serializer\BuyerContextBuilder.inner' ]
         autoconfigure: false
 
-    'App\Serializer\commandContextBuilder':
+    'App\Serializer\CommandContextBuilder':
         decorates: 'api_platform.serializer.context_builder'
-        arguments: [ '@App\Serializer\commandContextBuilder.inner' ]
+        arguments: [ '@App\Serializer\CommandContextBuilder.inner' ]
+        autoconfigure: false
+
+    'App\Serializer\PhoneContextBuilder':
+        decorates: 'api_platform.serializer.context_builder'
+        arguments: [ '@App\Serializer\PhoneContextBuilder.inner' ]
         autoconfigure: false
