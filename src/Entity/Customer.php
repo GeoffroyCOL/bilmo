@@ -53,6 +53,14 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *              "security"="is_granted('ROLE_ADMIN')",
  *              "security_message"="Vous ne pouvez pas les droits pour supprimer un client !"
  *          },
+ *          "get_list_buyers": {
+ *              "method": "GET",
+ *              "path": "/customers/{id}/buyers",
+ *              "controller": App\Controller\Api\Buyer\ListBuyers::class,
+ *              "security"="is_granted('ROLE_ADMIN') or object == user",
+ *              "security_message"="Vous ne pouvez pas les droits de consulter la liste des acheteurs d'un autre client !",
+ *              "normalization_context"={"groups"={"buyer_list:read"}}
+ *         }
  *      }
  * )
  * 
