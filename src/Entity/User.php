@@ -29,7 +29,7 @@ abstract class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * 
+     *
      * @Groups({
      *      "user:read:list",
      *      "user:read",
@@ -42,7 +42,7 @@ abstract class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * 
+     *
      * @Groups({
      *      "user:read:list",
      *      "user:read",
@@ -69,7 +69,7 @@ abstract class User implements UserInterface
      * plainPassword
      *
      * @var string
-     * 
+     *
      * @Groups({
      *      "user:write"
      * })
@@ -78,7 +78,7 @@ abstract class User implements UserInterface
 
     /**
      * @ORM\Column(type="datetime")
-     * 
+     *
      * @Groups({
      *      "user:read:list",
      *      "user:read"
@@ -88,7 +88,7 @@ abstract class User implements UserInterface
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * 
+     *
      * @Groups({
      *      "user:read:list",
      *      "user:read"
@@ -98,7 +98,7 @@ abstract class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * 
+     *
      * @Groups({
      *      "user:read:list",
      *      "user:read",
@@ -223,7 +223,7 @@ abstract class User implements UserInterface
      *
      * @param  string $plainPassword
      * @return  self
-     */ 
+     */
     public function setPlainPassword($plainPassword)
     {
         $this->plainPassword = $plainPassword;

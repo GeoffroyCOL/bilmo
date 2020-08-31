@@ -13,16 +13,16 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\NumericFilter;
 
 /**
  * @ORM\Entity(repositoryClass=PhoneRepository::class)
- * 
+ *
  * @ApiResource(
  *      attributes={
  *          "security"="is_granted('ROLE_USER')",
  *          "security_message"="Vous devez être connecté(e) pour accéde à cette zone",
  *          "pagination_items_per_page"=10
  *      },
- * 
+ *
  *      denormalizationContext={"groups"={"phone:write"}},
- * 
+ *
  *      collectionOperations={
  *          "POST"={
  *              "security"="is_granted('ROLE_ADMIN')",
@@ -32,7 +32,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\NumericFilter;
  *              "normalization_context"={"groups"={"phone:read:list"}}
  *          }
  *      },
- * 
+ *
  *      itemOperations={
  *          "PUT"={
  *              "security"="is_granted('ROLE_ADMIN')",
@@ -47,7 +47,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\NumericFilter;
  *          }
  *      }
  * )
- * 
+ *
  * @ApiFilter(SearchFilter::class, properties={"name": "partial"}),
  * @ApiFilter(NumericFilter::class, properties={"price", "number", "numberSold"})
  * @ApiFilter(BooleanFilter::class, properties={"active"})
@@ -58,7 +58,7 @@ class Phone
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * 
+     *
      * @Groups({
      *      "command:read",
      *      "phone:read:list",
@@ -69,7 +69,7 @@ class Phone
 
     /**
      * @ORM\Column(type="string", length=255)
-     * 
+     *
      * @Groups({
      *      "phone:write",
      *      "command:read",
@@ -82,7 +82,7 @@ class Phone
 
     /**
      * @ORM\Column(type="float")
-     * 
+     *
      * @Groups({
      *      "phone:write",
      *      "command:read",
@@ -95,7 +95,7 @@ class Phone
 
     /**
      * @ORM\Column(type="string", length=255)
-     * 
+     *
      * @Groups({
      *      "phone:write",
      *      "phone:read:list",
@@ -106,7 +106,7 @@ class Phone
 
     /**
      * @ORM\Column(type="text")
-     * 
+     *
      * @Groups({
      *      "phone:write",
      *      "phone:read:list",
@@ -117,9 +117,9 @@ class Phone
 
     /**
      * Number of phones offered for sale
-     * 
+     *
      * @ORM\Column(type="integer")
-     * 
+     *
      * @Groups({
      *      "phone:write",
      *      "admin:read:phone"
@@ -129,9 +129,9 @@ class Phone
 
     /**
      * Number of phones sold
-     * 
+     *
      * @ORM\Column(type="integer")
-     * 
+     *
      * @Groups({
      *      "admin:read:phone"
      * })
@@ -140,9 +140,9 @@ class Phone
 
     /**
      * If the phone goes on sale
-     * 
+     *
      * @ORM\Column(type="boolean")
-     * 
+     *
      * @Groups({
      *      "admin:read:phone",
      *      "phone:read"

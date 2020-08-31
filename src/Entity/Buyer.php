@@ -17,14 +17,14 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=BuyerRepository::class)
- * 
+ *
  * @ApiResource(
  *      attributes={
  *          "security"="is_granted('ROLE_USER')",
  *          "security_message"="Vous devez être connecté(e) pour accéde à cette zone",
  *          "pagination_items_per_page"=10
  *      },
- * 
+ *
  *      collectionOperations={
  *          "GET"={
  *              "security"="is_granted('ROLE_ADMIN')",
@@ -45,9 +45,9 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *          },
  *      }
  * )
- * 
+ *
  * @ApiFilter(SearchFilter::class, properties={"firstName": "partial", "lastName": "partial", "customers":"partial"})
- * 
+ *
  */
 class Buyer
 {
@@ -55,7 +55,7 @@ class Buyer
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * 
+     *
      * @Groups({
      *      "buyer:read:list",
      *      "buyer:read",
@@ -70,7 +70,7 @@ class Buyer
 
     /**
      * @ORM\Column(type="string", length=255)
-     * 
+     *
      * @Groups({
      *      "buyer:read:list",
      *      "buyer:read",
@@ -86,7 +86,7 @@ class Buyer
 
     /**
      * @ORM\Column(type="string", length=255)
-     * 
+     *
      * @Groups({
      *      "buyer:read:list",
      *      "buyer:read",
@@ -102,9 +102,9 @@ class Buyer
 
     /**
      * The date of his first order
-     * 
+     *
      * @ORM\Column(type="datetime")
-     * 
+     *
      * @Groups({
      *      "buyer:read:list",
      *      "buyer:read",
@@ -115,7 +115,7 @@ class Buyer
 
     /**
      * @ORM\ManyToMany(targetEntity=Customer::class, mappedBy="buyers")
-     * 
+     *
      * @Groups({
      *      "admin:buyer:read"
      * })
@@ -124,7 +124,7 @@ class Buyer
 
     /**
      * @ORM\OneToMany(targetEntity=Command::class, mappedBy="buyer", orphanRemoval=true)
-     * 
+     *
      * @Groups({
      *      "admin:buyer:read"
      * })
@@ -133,7 +133,7 @@ class Buyer
     
     /**
      * commandsByCustomer - Retrieve the list of orders from a customer
-     * 
+     *
      * @Groups({
      *      "customer:buyer:read"
      * })
@@ -311,7 +311,7 @@ class Buyer
 
     /**
      * Get commandsByCustomer - Retrieve the list of orders from a customer
-     */ 
+     */
     public function getCommandsByCustomer()
     {
         return $this->commandsByCustomer;
@@ -321,7 +321,7 @@ class Buyer
      * Set commandsByCustomer - Retrieve the list of orders from a customer
      *
      * @return  self
-     */ 
+     */
     public function setCommandsByCustomer($commandsByCustomer)
     {
         $this->commandsByCustomer = $commandsByCustomer;

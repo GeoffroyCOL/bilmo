@@ -13,16 +13,16 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=CommandRepository::class)
- * 
+ *
  * @ApiResource(
  *      attributes={
  *          "security"="is_granted('ROLE_USER')",
  *          "security_message"="Vous devez être connecté(e) pour accéde à cette zone",
  *          "pagination_items_per_page"=10
  *      },
- * 
+ *
  *      denormalizationContext={"groups"={"command:write"}},
- * 
+ *
  *      collectionOperations={
  *          "GET"={
  *              "security"="is_granted('ROLE_ADMIN')",
@@ -34,7 +34,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *              "security_message"="Vous ne pouvez pas ajouter de commande !"
  *          }
  *      },
- * 
+ *
  *      itemOperations={
  *          "GET"={
  *              "security"="is_granted('ROLE_ADMIN') or is_granted('READ_COMMAND', object)",
@@ -47,7 +47,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *          }
  *      }
  * )
- * 
+ *
  * @ApiFilter(SearchFilter::class, properties={"id": "exact", "buyer": "partial", "customers":"partial"})
  */
 class Command
@@ -56,7 +56,7 @@ class Command
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * 
+     *
      * @Groups({
      *      "command:read:list",
      *      "command:read",
@@ -69,7 +69,7 @@ class Command
 
     /**
      * @ORM\Column(type="datetime")
-     * 
+     *
      * @Groups({
      *      "command:read:list",
      *      "command:read",
@@ -82,7 +82,7 @@ class Command
 
     /**
      * @ORM\OneToMany(targetEntity=LineCommand::class, mappedBy="command", orphanRemoval=true, cascade={"persist"})
-     * 
+     *
      * @Groups({
      *      "command:read",
      *      "command:write",
@@ -94,7 +94,7 @@ class Command
     /**
      * @ORM\ManyToOne(targetEntity=Buyer::class, inversedBy="commands", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
-     * 
+     *
      * @Groups({
      *      "command:read:list",
      *      "command:read",
@@ -108,7 +108,7 @@ class Command
     /**
      * @ORM\ManyToOne(targetEntity=Customer::class, inversedBy="commands")
      * @ORM\JoinColumn(nullable=false)
-     * 
+     *
      * @Groups({
      *      "command:read:list",
      *      "admin:command:read",
@@ -247,16 +247,16 @@ class Command
 
     /**
      * Get the value of price
-     * 
+     *
      *  @Groups({
      *      "command:read",
      *      "command:read:list",
      *      "user:read",
      *      "customer:buyer:read"
      * })
-     * 
+     *
      * @return  float|null
-     */ 
+     */
     public function getPrice(): ?float
     {
         $total = 0;

@@ -42,7 +42,7 @@ class BuyerVoter extends Voter
     {
         $user = $token->getUser();
 
-        if (($user instanceof Customer && ( $attribute === "READ_BUYER" || $attribute === "REMOVE_BUYER" ) && $user->getBuyers()->contains($subject))) {
+        if (($user instanceof Customer && ($attribute === "READ_BUYER" || $attribute === "REMOVE_BUYER") && $user->getBuyers()->contains($subject))) {
             return $subject;
         }
     }

@@ -17,16 +17,16 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
- * 
+ *
  * @ApiResource(
  *      attributes={
  *          "security"="is_granted('ROLE_USER')",
  *          "security_message"="Vous devez être connecté(e) pour accéde à cette zone",
  *          "pagination_items_per_page"=10
  *      },
- * 
+ *
  *      denormalizationContext={"groups"={"user:write"}},
- * 
+ *
  *      collectionOperations={
  *          "GET"={
  *              "security"="is_granted('ROLE_ADMIN')",
@@ -38,7 +38,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *              "security_message"="Vous ne pouvez pas les droits pour ajouter un nouveau client !"
  *          }
  *      },
- * 
+ *
  *      itemOperations={
  *          "GET"={
  *              "security"="is_granted('ROLE_ADMIN') or object == user",
@@ -71,9 +71,9 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *         }
  *      }
  * )
- * 
+ *
  * @ApiFilter(SearchFilter::class, properties={"username": "partial"})
- * 
+ *
  */
 class Customer extends User
 {
@@ -81,7 +81,7 @@ class Customer extends User
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * 
+     *
      * @Groups({
      *      "user:read:list",
      *      "user:read",
@@ -89,13 +89,13 @@ class Customer extends User
      *      "buyer:read",
      *      "command:read"
      * })
-     * 
+     *
      */
     protected $id;
 
     /**
      * @ORM\ManyToMany(targetEntity=Buyer::class, inversedBy="customers")
-     * 
+     *
      * @Groups({
      *      "user:read"
      * })
@@ -104,7 +104,7 @@ class Customer extends User
 
     /**
      * @ORM\OneToMany(targetEntity=Command::class, mappedBy="customer", orphanRemoval=true)
-     * 
+     *
      * @Groups({
      *      "user:read"
      * })

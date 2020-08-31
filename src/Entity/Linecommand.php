@@ -24,7 +24,7 @@ class LineCommand
 
     /**
      * @ORM\Column(type="integer")
-     * 
+     *
      * @Groups({
      *      "command:read",
      *      "command:write",
@@ -42,7 +42,7 @@ class LineCommand
     /**
      * @ORM\ManyToOne(targetEntity=Phone::class)
      * @ORM\JoinColumn(nullable=false)
-     * 
+     *
      * @Groups({
      *      "command:read",
      *      "command:write",
@@ -132,13 +132,13 @@ class LineCommand
 
     /**
      * Display price for a row
-     * 
+     *
      * @Groups({
      *      "command:read"
      * })
-     * 
+     *
      * @return  float|null
-     */ 
+     */
     public function getPrice(): ?float
     {
         return round($this->getNumber() * $this->getPhone()->getPrice(), 2, PHP_ROUND_HALF_UP);
