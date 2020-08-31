@@ -61,7 +61,8 @@ class Command
      *      "command:read:list",
      *      "command:read",
      *      "buyer:read",
-     *      "user:read"
+     *      "user:read",
+     *      "command_list:read"
      * })
      */
     private $id;
@@ -73,7 +74,8 @@ class Command
      *      "command:read:list",
      *      "command:read",
      *      "buyer:read",
-     *      "user:read"
+     *      "user:read",
+     *      "command_list:read"
      * })
      */
     private $createdAt;
@@ -83,7 +85,8 @@ class Command
      * 
      * @Groups({
      *      "command:read",
-     *      "command:write"
+     *      "command:write",
+     *      "command_list:read"
      * })
      */
     private $lineCommand;
@@ -96,7 +99,8 @@ class Command
      *      "command:read:list",
      *      "command:read",
      *      "user:read",
-     *      "command:write"
+     *      "command:write",
+     *      "command_list:read"
      * })
      */
     private $buyer;

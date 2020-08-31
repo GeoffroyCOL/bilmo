@@ -61,9 +61,9 @@ class Phone
      * 
      * @Groups({
      *      "command:read",
-     *      "phone:read:list"
+     *      "phone:read:list",
+     *      "command_list:read"
      * })
-     * 
      */
     private $id;
 
@@ -74,7 +74,8 @@ class Phone
      *      "phone:write",
      *      "command:read",
      *      "phone:read:list",
-     *      "phone:read"
+     *      "phone:read",
+     *      "command_list:read"
      * })
      */
     private $name;
@@ -86,7 +87,8 @@ class Phone
      *      "phone:write",
      *      "command:read",
      *      "phone:read:list",
-     *      "phone:read"
+     *      "phone:read",
+     *      "command_list:read"
      * })
      */
     private $price;

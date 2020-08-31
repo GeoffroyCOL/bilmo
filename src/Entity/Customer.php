@@ -60,6 +60,14 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *              "security"="is_granted('ROLE_ADMIN') or object == user",
  *              "security_message"="Vous ne pouvez pas les droits de consulter la liste des acheteurs d'un autre client !",
  *              "normalization_context"={"groups"={"buyer_list:read"}}
+ *         },
+ *          "get_list_commands": {
+ *              "method": "GET",
+ *              "path": "/customers/{id}/commands",
+ *              "controller": App\Controller\Api\Command\ListCommands::class,
+ *              "security"="is_granted('ROLE_ADMIN') or object == user",
+ *              "security_message"="Vous ne pouvez pas les droits de consulter la liste des commandes d'un autre client !",
+ *              "normalization_context"={"groups"={"command_list:read"}}
  *         }
  *      }
  * )

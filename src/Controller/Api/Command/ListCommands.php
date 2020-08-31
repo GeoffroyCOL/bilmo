@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Retrieve list of buyers by customer
+ * Retrieve list of commands by customer
  */
 
-namespace App\Controller\Api\Buyer;
+namespace App\Controller\Api\Command;
 
 use Symfony\Component\Security\Core\Security;
 
-class ListBuyers
+class ListCommands
 {
     private $security;
 
@@ -26,6 +26,6 @@ class ListBuyers
     public function __invoke($data)
     {
         $customer = $this->security->getUser();
-        return $data->getBuyers();
+        return $data->getCommands();
     }
 }

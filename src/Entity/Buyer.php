@@ -62,7 +62,8 @@ class Buyer
      *      "user:read",
      *      "command:read:list",
      *      "command:read",
-     *      "buyer_list:read"
+     *      "buyer_list:read",
+     *      "command_list:read"
      * })
      */
     private $id;
@@ -77,7 +78,8 @@ class Buyer
      *      "command:read:list",
      *      "command:read",
      *      "command:write",
-     *      "buyer_list:read"
+     *      "buyer_list:read",
+     *      "command_list:read"
      * })
      */
     private $firstName;
@@ -92,7 +94,8 @@ class Buyer
      *      "command:read:list",
      *      "command:read",
      *      "command:write",
-     *      "buyer_list:read"
+     *      "buyer_list:read",
+     *      "command_list:read"
      * })
      */
     private $lastName;

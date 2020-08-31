@@ -27,7 +27,8 @@ class LineCommand
      * 
      * @Groups({
      *      "command:read",
-     *      "command:write"
+     *      "command:write",
+     *      "command_list:read"
      * })
      */
     private $number;
@@ -44,9 +45,9 @@ class LineCommand
      * 
      * @Groups({
      *      "command:read",
-     *      "command:write"
+     *      "command:write",
+     *      "command_list:read"
      * })
-     * 
      */
     private $phone;
     
