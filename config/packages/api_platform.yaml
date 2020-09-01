@@ -10,6 +10,29 @@ api_platform:
                 name: Authorization
                 type: header
 
+    # The title of the API.
+    title: 'Bilmo'
+
+
+    # The version of the API.
+    version: '1.0.0'
+
+    http_cache:
+        # Automatically generate etags for API responses.
+        etag: true
+
+        # Default value for the response max age.
+        max_age: 3600
+
+        # Default value for the response shared (proxy) max age.
+        shared_max_age: 3600
+
+        # Default values of the "Vary" HTTP header.
+        vary: ['Accept']
+
+        # To make all responses public by default.
+        public: ~
+    
     exception_to_status:
         Symfony\Component\Serializer\Exception\ExceptionInterface: 400
         ApiPlatform\Core\Exception\InvalidArgumentException: !php/const Symfony\Component\HttpFoundation\Response::HTTP_BAD_REQUEST
